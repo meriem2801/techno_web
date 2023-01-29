@@ -1,9 +1,6 @@
-//const express=required('express')
-
 import express, { json,response } from "express"
 import bodyParser from "body-parser"
 import mongoose from "mongoose"
-//require('dotenv').config();
 import * as dotenv from 'dotenv'
 dotenv.config()
 import jwt from "jsonwebtoken"
@@ -31,8 +28,7 @@ let copie= [
 console.log(perso)
 var id1=0
 var id2=0
-//let challenger1=copie.map(x=>x.name)
-//console.log("%s",challenger1[0])
+
 
 
 app.post("/login", (req, res) => {
@@ -96,9 +92,7 @@ app.get("/joueur1", async (req, res) => {
   perso=perso.filter(x=>x._id==req.body.id)
   console.log(perso)
   var chall1=Joueur1.insertMany(perso)
-  /*Joueur.find().then((persos) => res.json(persos))
-    .catch(() => res.status(404).end())*/
-  //res.send({ message: "Tu peux chosir parmi les perso suivants" })
+
 })
 //Récupère un joueur et leurs infos selon leur ID
 app.get("/joueur1/:id", async (req, res) => {
@@ -108,9 +102,7 @@ app.get("/joueur1/:id", async (req, res) => {
   Joueur1.findById(req.params.id)
     .then((joueur) => res.json(joueur))
     .catch(() => res.status(404).end())
-  /*Joueur.findById(req.params.id)
-    .then((joueur) => res.json(joueur))
-    .catch(() => res.status(404).end())*/
+
 })
 //Supprime de la liste le perso selon l'ID
 app.delete("/joueur1/:id", async (req, res) => {
@@ -125,10 +117,7 @@ app.post("/joueur2",(req,res)=> {
   .catch(() => res.status(404).end())
   const count1= Joueur1.countDocuments()
   console.log('Nombre de joueur1 %d',count1)
-  //console.log("%d",count1)
-  //res.send({message:"Choisis le second adversaire: "})
-  /*const challenger2 = new Joueur2(req.body)
-  challenger2.save().then((joueur2) => res.json(joueur2))*/
+
 })
 //On renvoie la liste des persos disponibles
 app.get("/joueur2", async (req, res) => {
@@ -136,9 +125,7 @@ app.get("/joueur2", async (req, res) => {
   Joueur.findByIdAndRemove(req.body.id)
     .then((joueur) => res.json(joueur))
     .catch(() => res.status(404).end())
-  //let copie=perso
-  //console.log(perso)
-  copie=copie.filter(x=>x._id==req.body.id) //.forEach(x=>Joueur2.insertMany(x))
+  copie=copie.filter(x=>x._id==req.body.id)
   console.log(copie)
   var chall2=Joueur2.insertMany(copie)
 
@@ -190,7 +177,6 @@ app.get("/battle/result",(req,res)=>{
   if ((vie[id1-1]>10*vie[id2-1])||pouvoir[id1-1]+vie[id1-1]>pouvoir[id2-1]+vie[id2-1])
         res.send({message:"Le vainqueur est %s", n1});
   else{
-    //if ((challenger2.PV>10*challenger1.PV)||(challenger2.PV+challenger2.HP>challenger1.PV+challenger1.HP))
     res.send({message:"Le vainqueur est %s ", n2});
   } 
 })
@@ -200,6 +186,3 @@ app.get("*", (req, res) => {
 app.listen(3006, () => { 
   console.log(`Server Started at http://localhost:${3006}`)
 })
-//app.listen(3000)
-//Ajouter dans battle qui est le gagnant et comment le déterminer
-//Comment utiliser id clef etrangère
