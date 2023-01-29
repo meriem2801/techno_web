@@ -136,7 +136,12 @@ app.get("/joueur2/:id", async (req, res) => {
     .then((joueur) => res.json(joueur))
     .catch(() => res.status(404).end())
 })
-
+//Supprime de la liste le perso selon l'ID
+app.delete("/joueur2/:id", async (req, res) => {
+  Joueur2.findByIdAndRemove(req.params.id)
+    .then((joueur) => res.json(joueur))
+    .catch(() => res.status(404).end())
+})
 //Battle
 app.post("/battle",async (req, res)=>{
     res.send({message:"Souhaitez vous garder les persos?"})
